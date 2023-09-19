@@ -53,7 +53,6 @@ module.exports.getEmployees = async function () {
 
         return response.data
     } catch (e) {
-        console.log('Error: ' + e)
         throw new Error('Could not get employees')
     }
 }
