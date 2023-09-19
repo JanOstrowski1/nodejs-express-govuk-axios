@@ -11,5 +11,17 @@ module.exports.validateEmployee = function (employee) {
         return "Invalid bank number"
     }
 
+    if (employee.fname.length > 50) {
+        return "First name is must me shorter than 50 characters"
+    }
+
+    if (employee.lname.length > 50) {
+        return "Last name is must me shorter than 50 characters"
+    }
+
+    if (employee.nin.length != 8) {
+        return "Nin is needs to be 8 characters long"
+    }
+
     return null
 }

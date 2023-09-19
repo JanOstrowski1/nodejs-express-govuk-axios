@@ -5,15 +5,46 @@ module.exports.URL = '/hr/employee/'
 
 
 module.exports.createEmployee = async function (employee) {
-    const response = await axios.post(this.URL, employee)
+    
+    try {
+       const response = await axios.post(this.URL, employee)
 
-    return response.data
+       return response.data
+    } catch (e) {
+        if(e.response.status=='400'){
+            throw new Error('Invalid data')
+        }
+        if(e.response.status=='500'){
+            throw new Error('Could not create employee')
+        }
+        else{
+            throw new Error('Failed to create employee')
+        }
+    }
+
 }
 
 module.exports.getEmployee = async function (id) {
-        const response = await axios.get(this.URL + id)
+        
 
-        return response.data
+        try {
+            
+            const response = await axios.get(this.URL + id)
+
+            return response.data
+        } catch (e) {
+            if(id == null){
+                throw new Error('Invalid ID')
+            }
+            if(e.response.status=='400'){
+                throw new Error('Employee does not exist')
+            }else{
+                throw new Error('Failed to get employee')
+            }
+            
+            
+        }
+        
 }
 
 module.exports.getEmployees = async function () {
